@@ -18,7 +18,10 @@ if (isset($_POST['enviar'])) {
         $num = $_POST['num'];
         // Si los parámetros son correctos, llamamos a la función letra de calcularLetra.php
         $ciudades =$cliente->getCiudades($num);
-        var_dump($ciudades);
+        echo "<h1>Ciudades</h1>";
+        for ($i=0; $i < count($ciudades) ; $i++) { 
+            echo " Nombre: " . $ciudades[$i]["nombre"] . " Poblacion: ". $ciudades[$i]["poblacion"]  ."<br>";
+        }
     } else {
         $error = "<strong>Error:</strong> Debes introducir un DNI correcto<br/><br/>Ej: 45678987";
     }
