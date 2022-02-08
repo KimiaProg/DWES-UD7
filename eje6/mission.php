@@ -7,18 +7,9 @@ $dni = "";
 
 
 $wsdl = 'https://www.crcind.com/csp/samples/SOAP.Demo.CLS?WSDL'; //URL de nuestro servicio soap
-
 //Basados en la estructura del servicio armamos un array
 
-
 //Enviamos el Request
-
-
-if (isset($_POST['enviar'])) {
-    $params = Array(
-        "zip" => $_POST['num'],
-        );
-    
     $options = Array(
         "uri"=> $wsdl,
         "style"=> SOAP_RPC,
@@ -32,18 +23,9 @@ if (isset($_POST['enviar'])) {
         );
 
     $cliente = new SoapClient($wsdl, $options);
-
-    // Establecemos los parámetros de envío
-    if (!empty($_POST['num'])) {
-        // Si los parámetros son correctos, llamamos a la función letra de calcularLetra.php
-       $resultado =$cliente->LookupCity($params);
+    $resultado =$cliente->Mission();
        
-    } else {
-        $error = "<strong>Error:</strong> Debes introducir un DNI correcto<br/><br/>Ej: 45678987";
-    }
-}
 ?>
-
 
 
 <!DOCTYPE html>
@@ -55,23 +37,11 @@ if (isset($_POST['enviar'])) {
 <body>
     <h1>Obtener letra DNI</h1>
     <h2>Servicio Web + PHP + SOAP</h2>
-    <form action="lookupCity.php" method="post">
-    <?php
-        print "<input type='number' name='num'>";
-
-        print "<input type='submit' name='enviar' value='Calcular Letra'>";
-        print "<p class='error'>$error</p>";
+    <?php  
         print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>";
-
-        if (isset($_POST['enviar'])) {
-            foreach ($resultado->LookupCityResult as $p) {
-                echo $p . "<br>";
-            }
-        }
-
-
-        echo "</p>";       ?>
-    </form>
+        echo $resultado->MissionResult ;
+        echo "</p>";  
+     ?>
     <div id="footer">Creado con <span class="red">♥</span> por: <a href="https://www.raulprietofernandez.net/">Raúl Prieto Fernández</a></div>
 </body>
 </html>

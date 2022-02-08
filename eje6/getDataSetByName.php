@@ -16,7 +16,7 @@ $wsdl = 'https://www.crcind.com/csp/samples/SOAP.Demo.CLS?WSDL'; //URL de nuestr
 
 if (isset($_POST['enviar'])) {
     $params = Array(
-        "Name" => $_POST['nom'],
+        "name" => $_POST['nom'],
         );
     
     $options = Array(
@@ -36,7 +36,7 @@ if (isset($_POST['enviar'])) {
     // Establecemos los parámetros de envío
     if (!empty($_POST['nom'])) {
         // Si los parámetros son correctos, llamamos a la función letra de calcularLetra.php
-       var_dump($cliente->GetDataSetByName($params)->GetDataSetByNameResult);
+       $resultado =$cliente->GetDataSetByName($params);
        
     } else {
         $error = "<strong>Error:</strong> Debes introducir un DNI correcto<br/><br/>Ej: 45678987";
@@ -61,8 +61,17 @@ if (isset($_POST['enviar'])) {
 
         print "<input type='submit' name='enviar' value='Calcular Letra'>";
         print "<p class='error'>$error</p>";
-        print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>$resultado</p>";
-    ?>
+        print "<p style='font-size: 12pt;font-weight: bold;color: #0066CC;'>";
+
+        if (isset($_POST['enviar'])) {
+            foreach ($resultado->GetDataSetByNameResult as $p) {
+                echo $p . "<br>";
+            }
+        }
+
+
+        echo "</p>";    
+            ?>
     </form>
     <div id="footer">Creado con <span class="red">♥</span> por: <a href="https://www.raulprietofernandez.net/">Raúl Prieto Fernández</a></div>
 </body>
