@@ -7,7 +7,7 @@
 <body>
     <h1>Obtener letra DNI</h1>
     <h2>Servicio Web + PHP + SOAP</h2>
-    <form action="./index.php?controller=ciudad&action=procesar" method="post">
+    <form action="./index.php" method="post">
     <?php
         print "<input type='number' name='num'>";
         print "<input type='submit' name='enviar' value='Calcular Letra'>";

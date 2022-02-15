@@ -5,6 +5,7 @@ function procesar(){
     $uri="http://localhost/DWS/DWES-UD7/eje4Servidor/controllers/";
     $server = new SoapServer(null,array('uri'=>$uri));
     $server->addFunction("getCiudades");
+    $server->addFunction("setCiudades");
     $server->handle();
 }
 
